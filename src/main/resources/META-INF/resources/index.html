@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quarkus HTMX Demo</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <script
+      src="https://unpkg.com/htmx.org@1.6.0"
+      integrity="sha384-G4dtlRlMBrk5fEiRXDsLjriPo8Qk5ZeHVVxS8KhX6D7I9XXJlNqbdvRlp9/glk5D"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <section class="section">
+      <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item">Test
+          </a>
+
+          <a
+            role="button"
+            class="navbar-burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item"> Home </a>
+
+            <a class="navbar-item"> Documentation </a>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link"> More </a>
+
+              <div class="navbar-dropdown">
+                <a class="navbar-item"> About </a>
+                <a class="navbar-item"  hx-trigger="click" hx-get="/person" hx-target="#main-area"> People </a>
+                <a class="navbar-item" hx-trigger="click" hx-get="/contact" hx-target="#main-area"> Contact </a>
+                <hr class="navbar-divider" />
+                <a class="navbar-item"> Report an issue </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                <a class="button is-primary">
+                  <strong>Sign up</strong>
+                </a>
+                <a class="button is-light"> Log in </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="main-area"></div>
+    </section>
+  </body>
+</html>
