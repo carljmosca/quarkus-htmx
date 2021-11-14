@@ -1,0 +1,12 @@
+<div class="container">
+  {#for person in persons}
+  <div class="columns" hx-get="/person/?page={nextPage}" hx-trigger="revealed" hx-swap="afterend">
+    <div class="column" <p><strong>{person.firstName} {person.lastName}</strong></p>
+    </div>
+    <div class="column">{person.email}<p>{person.phone}</p>
+    </div>
+    <div class="column">{person.address}</div>
+    <div class="column">{person.city}, {person.state} {person.zip}</div>
+  </div>
+  {/for}
+</div>

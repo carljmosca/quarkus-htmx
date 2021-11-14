@@ -11,10 +11,9 @@ import org.acme.model.Person;
 
 @ApplicationScoped
 public class PersonService {
-    
+
     public static final int PAGE_SIZE = 10;
     private List<Person> persons = new ArrayList<>();
-
 
     public List<Person> getPersons(int pageIndex) {
         if (persons.size() < ((pageIndex + 1) * PAGE_SIZE)) {
@@ -31,9 +30,9 @@ public class PersonService {
         Faker faker = new Faker();
         Person person = null;
         for (int i = 0; i < PAGE_SIZE; i++) {
-            person = new Person(faker.name().firstName(), faker.name().lastName(), faker.internet().emailAddress(),
-                    faker.phoneNumber().cellPhone(), faker.address().streetAddress(), faker.address().city(),
-                    faker.address().state(), faker.address().zipCode());
+            person = new Person(faker.idNumber().valid(), faker.name().firstName(), faker.name().lastName(),
+                    faker.internet().emailAddress(), faker.phoneNumber().cellPhone(), faker.address().streetAddress(),
+                    faker.address().city(), faker.address().state(), faker.address().zipCode());
             persons.add(person);
         }
     }

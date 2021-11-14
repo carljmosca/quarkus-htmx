@@ -2,6 +2,7 @@ package org.acme.model;
 
 public class Person {
 
+    private String id;
     private String firstName;
     private String lastName;
     private String email;
@@ -14,8 +15,9 @@ public class Person {
     public Person() {
     }
 
-    public Person(String firstName, String lastName, String email, String phone, String address, String city,
+    public Person(String id, String firstName, String lastName, String email, String phone, String address, String city,
             String state, String zip) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -24,6 +26,14 @@ public class Person {
         this.city = city;
         this.state = state;
         this.zip = zip;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getFirstName() {

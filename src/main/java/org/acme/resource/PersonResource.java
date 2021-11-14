@@ -13,36 +13,28 @@ import javax.ws.rs.core.MediaType;
 import org.acme.model.Person;
 import org.acme.service.PersonService;
 
-@Path("/person")
+import io.quarkus.qute.CheckedTemplate;
+import io.quarkus.qute.TemplateInstance;
+
+@Path("person")
 public class PersonResource {
 
     @Inject
     PersonService personService;
+    
+    @CheckedTemplate
+    public static class Templates {
+        public static native TemplateInstance personTable(List<Person> persons, int nextPage);  
+    }
 
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String getPersons(@QueryParam("page") @DefaultValue("0") int pageIndex) {
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance get(@QueryParam("page") @DefaultValue("0") int pageIndex) {
 
-        StringBuilder sb = new StringBuilder();
-        String triggerAttributes = String
-                .format("hx-get=\"/person/?page=%d\" hx-trigger=\"revealed\" hx-swap=\"afterend\"", pageIndex + 1);
         List<Person> persons = personService.getPersons(pageIndex);
-        for (int i = 0; i < PersonService.PAGE_SIZE; i++) {
-            sb.append(String.format("<div class=\"columns\" %s>", i == (PersonService.PAGE_SIZE - 1) ? triggerAttributes : ""));
-            sb.append(String.format("<div class=\"column\"><p><strong>%s %s</strong></p></div>", persons.get(i).getFirstName(),
-                    persons.get(i).getLastName()));
-            sb.append(getColumn(persons.get(i).getPhone()));
-            sb.append(getColumn(persons.get(i).getEmail()));
-            sb.append(getColumn(persons.get(i).getAddress()));
-            sb.append(getColumn(persons.get(i).getCity() + ", " +
-                persons.get(i).getState() + " " + persons.get(i).getZip()));
-            sb.append("</div>");
-        }
-        return sb.toString();
+        return Templates.personTable(persons, pageIndex + 1);
     }
 
-    private String getColumn(String value) {
-        return String.format("<div class=\"column\"><p>%s</p></div>", value);
-    }
+
 
 }

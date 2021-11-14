@@ -17,10 +17,13 @@
 
   <body>
     <section class="section">
-      <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+      <nav
+        class="navbar is-fixed-top"
+        role="navigation"
+        aria-label="main navigation"
+      >
         <div class="navbar-brand">
-          <a class="navbar-item">Test
-          </a>
+          <a class="navbar-item">Test </a>
 
           <a
             role="button"
@@ -46,8 +49,22 @@
 
               <div class="navbar-dropdown">
                 <a class="navbar-item"> About </a>
-                <a class="navbar-item"  hx-trigger="click" hx-get="/person" hx-target="#main-area"> People </a>
-                <a class="navbar-item" hx-trigger="click" hx-get="/contact" hx-target="#main-area"> Contact </a>
+                <a
+                  class="navbar-item"
+                  hx-trigger="click"
+                  hx-get="/person"
+                  hx-target="#main-area"
+                >
+                  People
+                </a>
+                <a
+                  class="navbar-item"
+                  hx-trigger="click"
+                  hx-get="/contact"
+                  hx-target="#main-area"
+                >
+                  Contact
+                </a>
                 <hr class="navbar-divider" />
                 <a class="navbar-item"> Report an issue </a>
               </div>
@@ -66,7 +83,35 @@
           </div>
         </div>
       </nav>
+      
+    </section>
+    <section>
       <div id="main-area"></div>
     </section>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Get all "navbar-burger" elements
+        const $navbarBurgers = Array.prototype.slice.call(
+          document.querySelectorAll(".navbar-burger"),
+          0
+        );
+
+        // Check if there are any navbar burgers
+        if ($navbarBurgers.length > 0) {
+          // Add a click event on each of them
+          $navbarBurgers.forEach((el) => {
+            el.addEventListener("click", () => {
+              // Get the target from the "data-target" attribute
+              const target = el.dataset.target;
+              const $target = document.getElementById(target);
+
+              // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+              el.classList.toggle("is-active");
+              $target.classList.toggle("is-active");
+            });
+          });
+        }
+      });
+    </script>
   </body>
 </html>
